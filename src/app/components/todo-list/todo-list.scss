@@ -1,0 +1,30 @@
+.todo-list-wrap {
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.empty-state {
+  padding: 52px 24px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.empty-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.empty-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+
+
+
+

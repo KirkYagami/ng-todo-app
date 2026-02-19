@@ -1,0 +1,13 @@
+
+.main-content {
+  padding: 30px 20px;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}

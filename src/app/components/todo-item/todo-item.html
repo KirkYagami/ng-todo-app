@@ -1,0 +1,33 @@
+
+<!-- TASK: Practice Radio buttons, checkboxes, multiple selects in HTML  -->
+
+<div class="todo-item"
+[class.todo-item--done]="todo().completed">
+
+  <label class="checkbox" [for]="'cb-' + todo().id">
+    <input
+      class="checkbox__native"
+      type="checkbox"
+      [id]="'cb-' + todo().id"
+      [checked]="todo().completed"
+      (change)="onToggle()"
+    />
+        <span class="checkbox__custom">
+
+      @if (todo().completed) {
+        <span class="checkbox__tick">✓</span>
+      }
+    </span>
+  </label>
+
+  <span class="todo-title">{{ todo().title}}</span>
+
+  <button
+   class="delete-btn"
+   (click)="onDelete()"
+   aria-label="Delete todo"
+   title="Delete"
+  >
+❌
+</button>
+</div>

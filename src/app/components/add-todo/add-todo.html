@@ -1,0 +1,33 @@
+
+
+<div class="add-todo">
+
+    <div class="input-row">
+
+        <input
+        class="todo-input"
+        type="text"
+        placeholder="What needs to be done? (Enter to add)"
+        [value]="inputValue()"
+        (input) = "OnInputChange($event)"
+        (keyup)="onKeyUp($event)"
+        maxlength="200"
+        autofocus
+        />
+
+        <button
+        class="add-btn"
+        (click)="onAddClick()"
+        [disabled]="!inputValue().trim()"
+        >
+        + Add
+        </button>
+    </div>
+
+  @if (inputValue().length > 0) {
+    <p class="char-count" [class.char-count--warn]="isNearLimit()">
+      {{ charsRemaining() }} characters remaining
+    </p>
+  }
+
+</div>

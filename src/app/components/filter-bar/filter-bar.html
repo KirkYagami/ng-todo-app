@@ -1,0 +1,25 @@
+<div class="filter-bar">
+  <span class="item-count">
+    {{ todoStore.activeCount() }}
+    {{ todoStore.activeCount() === 1 ? 'item' : 'items' }} left
+  </span>
+
+  <div class="filter-btns">
+    @for (filter of filters; track filter) {
+      <button
+        class="filter-btn"
+        [class.filter-btn--active]="todoStore.currentFilter() === filter"
+        (click)="onSetFilter(filter)"
+      >
+        {{ filter | titlecase }}
+      </button>
+    }
+  </div>
+
+  @if (todoStore.completedCount() > 0) {
+    <button class="clear-btn" (click)="onClearCompleted()">
+      Clear ({{ todoStore.completedCount() }})
+    </button>
+  }
+
+</div>

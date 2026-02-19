@@ -1,0 +1,21 @@
+<header class="app-header">
+  <div class="header-content">
+
+    <h1 class="header-title">
+      <span class="header-icon">✓</span>
+      My Todo App
+    </h1>
+
+    @if (todoStore.totalCount() > 0) {
+      <div class="header-stats">
+        <span class="badge">
+          {{ todoStore.totalCount() }} total
+        </span>
+        <span class="badge badge--highlight">
+          {{ todoStore.activeCount() }} remaining
+        </span>
+      </div>
+    }
+
+  </div>
+</header>
