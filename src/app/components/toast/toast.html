@@ -1,0 +1,13 @@
+<div
+  class="toast"
+  [class.toast--visible]="visible()"
+  [class.toast--success]="type() === 'success'"
+  [class.toast--error]="type() === 'error'"
+  [class.toast--info]="type() === 'info'"
+  [class.toast--warning]="type() === 'warning'"
+  role="alert"
+  aria-live="polite"
+>
+  <span class="toast__icon">{{ icon }}</span>
+  <span class="toast__msg">{{ message() }}</span>
+</div>
