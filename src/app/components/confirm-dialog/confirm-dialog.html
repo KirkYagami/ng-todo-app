@@ -1,0 +1,18 @@
+<!-- Backdrop dims the page and cancels on click -->
+<div class="backdrop" (click)="handleCancel()"></div>
+
+<!-- Dialog panel -->
+<div class="dialog" role="alertdialog" aria-modal="true">
+
+  <p class="dialog__msg">{{ message() }}</p>
+
+  <div class="dialog__actions">
+    <button class="btn btn--ghost"   (click)="handleCancel()">
+      {{ cancelLabel() }}
+    </button>
+    <button class="btn btn--danger"  (click)="handleConfirm()">
+      {{ confirmLabel() }}
+    </button>
+  </div>
+
+</div>
