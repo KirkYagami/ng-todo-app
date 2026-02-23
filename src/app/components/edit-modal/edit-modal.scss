@@ -1,0 +1,194 @@
+/* ── Backdrop ─────────────────────────────────────── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 9000;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ── Panel ────────────────────────────────────────── */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9001;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+  width: min(480px, 94vw);
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.22s ease;
+}
+
+/* ── Header ───────────────────────────────────────── */
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+}
+
+.modal__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.modal__close {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  &:hover { background: #f1f1f1; color: var(--danger); }
+}
+
+/* ── Body ─────────────────────────────────────────── */
+.modal__body {
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Footer ───────────────────────────────────────── */
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 24px 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Form fields ──────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.field__optional {
+  font-weight: 400;
+  text-transform: none;
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+
+.field__input {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(98, 0, 234, 0.1);
+  }
+
+  &--error {
+    border-color: var(--danger);
+    &:focus { box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.12); }
+  }
+
+  &--date {
+    max-width: 200px;
+  }
+}
+
+.field__error {
+  font-size: 0.78rem;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+/* ── Priority chip row ────────────────────────────── */
+.priority-row {
+  display: flex;
+  gap: 8px;
+}
+
+.priority-chip {
+  flex: 1;
+  padding: 8px 0;
+  text-align: center;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover { border-color: var(--text-muted); }
+
+  &--low    { color: #059669; }
+  &--medium { color: #d97706; }
+  &--high   { color: #dc2626; }
+
+  &--active {
+    &.priority-chip--low    { background: #ecfdf5; border-color: #059669; }
+    &.priority-chip--medium { background: #fffbeb; border-color: #d97706; }
+    &.priority-chip--high   { background: #fef2f2; border-color: #dc2626; }
+  }
+}
+
+/* Accessible hide */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ── Buttons ──────────────────────────────────────── */
+.btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.15s;
+
+  &--ghost {
+    background: #f0f0f0;
+    color: var(--text-muted);
+    &:hover { background: #e4e4e4; }
+  }
+
+  &--primary {
+    background: var(--primary);
+    color: #fff;
+    &:hover:not(:disabled) { filter: brightness(1.1); }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+}
+
+/* ── Animations ───────────────────────────────────── */
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp {
+  from { opacity: 0; transform: translate(-50%, calc(-50% + 14px)); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}

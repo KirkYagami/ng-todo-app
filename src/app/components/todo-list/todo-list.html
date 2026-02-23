@@ -1,31 +1,31 @@
 <div class="todo-list-wrap">
 
- @if (todoStore.filteredTodos().length === 0) {
+  @if (todoStore.filteredTodos().length === 0) {
 
     <div class="empty-state">
-    @if (todoStore.totalCount() === 0) {
+      @if (todoStore.totalCount() === 0) {
         <p class="empty-icon">📝</p>
         <p class="empty-title">No todos yet!</p>
         <p class="empty-sub">Add one above to get started.</p>
-    } @else {
+      } @else {
         <p class="empty-icon">🎉</p>
         <p class="empty-title">Nothing here!</p>
         <p class="empty-sub">No todos match the current filter.</p>
       }
     </div>
 
-    }@else { 
-        <div class="todo-list">
-            @for(todo of todoStore.filteredTodos(); track todo.id){
-                <app-todo-item
-                [todo] = "todo"
-                (deleteRequested) = "onDeleteTodo($event)"
-                />
-            }
+  } @else {
 
+    <div class="todo-list">
+      @for (todo of todoStore.filteredTodos(); track todo.id) {
+        <app-todo-item
+          [todo]="todo"
+          (deleteRequested)="onDeleteTodo($event)"
+          (editRequested)="onEditTodo($event)"
+        />
+      }
+    </div>
 
-        </div>
+  }
 
-
- }
-
+</div>

@@ -1,3 +1,4 @@
+<!-- src/app/app.html -->
 <app-header></app-header>
 
 <main class="main-content">
@@ -5,3 +6,11 @@
     <app-home></app-home>
   </div>
 </main>
+
+<!--
+  Invisible anchor element.
+  DynamicLoaderService inserts Toast / ConfirmDialog / EditModal
+  as siblings AFTER this element in the DOM.
+  Never add visible content inside this div.
+-->
+<div #dynamicHost></div>

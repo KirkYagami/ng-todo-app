@@ -1,9 +1,10 @@
+<div
+  class="todo-item"
+  [class.todo-item--done]="todo().completed"
+  [class.todo-item--overdue]="isOverdue()"
+>
 
-<!-- TASK: Practice Radio buttons, checkboxes, multiple selects in HTML  -->
-
-<div class="todo-item"
-[class.todo-item--done]="todo().completed">
-
+  <!-- ── Checkbox ─────────────────────────────────── -->
   <label class="checkbox" [for]="'cb-' + todo().id">
     <input
       class="checkbox__native"
@@ -12,22 +13,54 @@
       [checked]="todo().completed"
       (change)="onToggle()"
     />
-        <span class="checkbox__custom">
-
+    <span class="checkbox__custom">
       @if (todo().completed) {
         <span class="checkbox__tick">✓</span>
       }
     </span>
   </label>
 
-  <span class="todo-title">{{ todo().title}}</span>
+  <!-- ── Content ──────────────────────────────────── -->
+  <div class="todo-content">
+    <span class="todo-title">{{ todo().title }}</span>
 
-  <button
-   class="delete-btn"
-   (click)="onDelete()"
-   aria-label="Delete todo"
-   title="Delete"
-  >
-❌
-</button>
+    <!-- Meta row: priority badge + due date -->
+    <div class="todo-meta">
+
+      <span
+        class="priority-badge"
+        [class.priority-badge--low]="todo().priority === 'low'"
+        [class.priority-badge--medium]="todo().priority === 'medium'"
+        [class.priority-badge--high]="todo().priority === 'high'"
+      >
+        {{ todo().priority }}
+      </span>
+
+      @if (todo().dueDate) {
+        <span class="due-date" [class.due-date--overdue]="isOverdue()">
+          @if (isOverdue()) { ⚠ Overdue · }
+          {{ todo().dueDate | date:'MMM d' }}
+        </span>
+      }
+
+    </div>
+  </div>
+
+  <!-- ── Actions ──────────────────────────────────── -->
+  <div class="actions">
+    <button
+      class="action-btn action-btn--edit"
+      (click)="onEdit()"
+      title="Edit"
+      aria-label="Edit todo"
+    >✎</button>
+
+    <button
+      class="action-btn action-btn--delete"
+      (click)="onDelete()"
+      title="Delete"
+      aria-label="Delete todo"
+    >✕</button>
+  </div>
+
 </div>

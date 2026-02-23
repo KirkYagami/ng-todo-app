@@ -1,0 +1,84 @@
+<!-- Backdrop — click to cancel -->
+<div class="backdrop" (click)="onCancel()"></div>
+
+<!-- Modal panel -->
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+
+  <!-- Header -->
+  <div class="modal__header">
+    <h2 class="modal__title" id="modal-title">Edit Todo</h2>
+    <button class="modal__close" (click)="onCancel()" aria-label="Close">✕</button>
+  </div>
+
+  <!-- Body — the Reactive Form -->
+  <form class="modal__body" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- ── Title ─────────────────────────────────────────────── -->
+    <div class="field">
+      <label class="field__label" for="edit-title">Title</label>
+      <input
+        id="edit-title"
+        type="text"
+        class="field__input"
+        [class.field__input--error]="titleCtrl.invalid && titleCtrl.touched"
+        formControlName="title"
+        placeholder="What needs to be done?"
+        autocomplete="off"
+      />
+      @if (titleCtrl.invalid && titleCtrl.touched) {
+        <span class="field__error">
+          @if (titleCtrl.errors?.['required'])  { Title is required. }
+          @else if (titleCtrl.errors?.['minlength']) { At least 2 characters. }
+          @else if (titleCtrl.errors?.['maxlength']) { Max 200 characters.    }
+        </span>
+      }
+    </div>
+
+    <!-- ── Priority ──────────────────────────────────────────── -->
+    <div class="field">
+      <label class="field__label">Priority</label>
+      <div class="priority-row">
+        @for (p of priorities; track p) {
+          <label
+            class="priority-chip"
+            [class.priority-chip--active]="priorityCtrl.value === p"
+            [class.priority-chip--low]="p === 'low'"
+            [class.priority-chip--medium]="p === 'medium'"
+            [class.priority-chip--high]="p === 'high'"
+          >
+            <!-- Native radio is hidden; the label is the click target -->
+            <input
+              type="radio"
+              class="sr-only"
+              [value]="p"
+              formControlName="priority"
+            />
+            {{ p }}
+          </label>
+        }
+      </div>
+    </div>
+
+    <!-- ── Due Date ───────────────────────────────────────────── -->
+    <div class="field">
+      <label class="field__label" for="edit-due">
+        Due Date
+        <span class="field__optional">(optional)</span>
+      </label>
+      <input
+        id="edit-due"
+        type="date"
+        class="field__input field__input--date"
+        formControlName="dueDate"
+      />
+    </div>
+
+  </form>
+
+  <!-- Footer -->
+  <div class="modal__footer">
+    <button class="btn btn--ghost"   type="button" (click)="onCancel()">Cancel</button>
+    <button class="btn btn--primary" type="button" (click)="onSubmit()">Save Changes</button>
+  </div>
+
+</div>

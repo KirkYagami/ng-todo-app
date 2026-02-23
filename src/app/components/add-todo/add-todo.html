@@ -1,33 +1,84 @@
+<div class="add-todo" [formGroup]="form">
 
+  <!-- ── Main row ─────────────────────────────────── -->
+  <div class="input-row">
+    <input
+      class="todo-input"
+      [class.todo-input--error]="titleCtrl.invalid && titleCtrl.touched"
+      type="text"
+      placeholder="What needs to be done? (Enter to add)"
+      formControlName="title"
+      autocomplete="off"
+      autofocus
+      (keydown)="onKeydown($event)"
+    />
 
-<div class="add-todo">
+    <!-- Options toggle -->
+    <button
+      class="options-btn"
+      type="button"
+      (click)="toggleOptions()"
+      [class.options-btn--active]="showOptions"
+      title="Priority & due date"
+      aria-label="Toggle options"
+    >
+      ⚙
+    </button>
 
-    <div class="input-row">
+    <!-- Add button -->
+    <button class="add-btn" type="button" (click)="onAddClick()">
+      + Add
+    </button>
+  </div>
 
-        <input
-        class="todo-input"
-        type="text"
-        placeholder="What needs to be done? (Enter to add)"
-        [value]="inputValue()"
-        (input) = "OnInputChange($event)"
-        (keyup)="onKeyUp($event)"
-        maxlength="200"
-        autofocus
-        />
-
-        <button
-        class="add-btn"
-        (click)="onAddClick()"
-        [disabled]="!inputValue().trim()"
-        >
-        + Add
-        </button>
-    </div>
-
-  @if (inputValue().length > 0) {
-    <p class="char-count" [class.char-count--warn]="isNearLimit()">
-      {{ charsRemaining() }} characters remaining
+  <!-- ── Validation error ──────────────────────────── -->
+  @if (titleCtrl.invalid && titleCtrl.touched) {
+    <p class="field-error">
+      @if (titleCtrl.errors?.['required'])  { Please enter a title. }
+      @else if (titleCtrl.errors?.['minlength']) { At least 2 characters required. }
     </p>
+  }
+
+  <!-- ── Options panel ────────────────────────────── -->
+  @if (showOptions) {
+    <div class="options-panel">
+
+      <!-- Priority -->
+      <div class="opt-group">
+        <span class="opt-label">Priority</span>
+        <div class="priority-row">
+          @for (p of priorities; track p) {
+            <label
+              class="priority-chip"
+              [class.priority-chip--active]="priorityCtrl.value === p"
+              [class.priority-chip--low]="p === 'low'"
+              [class.priority-chip--medium]="p === 'medium'"
+              [class.priority-chip--high]="p === 'high'"
+            >
+              <input
+                type="radio"
+                class="sr-only"
+                [value]="p"
+                formControlName="priority"
+              />
+              {{ p }}
+            </label>
+          }
+        </div>
+      </div>
+
+      <!-- Due Date -->
+      <div class="opt-group">
+        <label class="opt-label" for="add-due">Due date (optional)</label>
+        <input
+          id="add-due"
+          type="date"
+          class="date-input"
+          formControlName="dueDate"
+        />
+      </div>
+
+    </div>
   }
 
 </div>
