@@ -1,6 +1,5 @@
 <div class="add-todo" [formGroup]="form">
 
-  <!-- ── Main row ─────────────────────────────────── -->
   <div class="input-row">
     <input
       class="todo-input"
@@ -12,26 +11,13 @@
       autofocus
       (keydown)="onKeydown($event)"
     />
-
-    <!-- Options toggle -->
-    <button
-      class="options-btn"
-      type="button"
-      (click)="toggleOptions()"
-      [class.options-btn--active]="showOptions"
-      title="Priority & due date"
-      aria-label="Toggle options"
-    >
+    <button class="options-btn" type="button" (click)="toggleOptions()"
+            [class.options-btn--active]="showOptions" title="Options" aria-label="Toggle options">
       ⚙
     </button>
-
-    <!-- Add button -->
-    <button class="add-btn" type="button" (click)="onAddClick()">
-      + Add
-    </button>
+    <button class="add-btn" type="button" (click)="onAddClick()">+ Add</button>
   </div>
 
-  <!-- ── Validation error ──────────────────────────── -->
   @if (titleCtrl.invalid && titleCtrl.touched) {
     <p class="field-error">
       @if (titleCtrl.errors?.['required'])  { Please enter a title. }
@@ -39,28 +25,27 @@
     </p>
   }
 
-  <!-- ── Options panel ────────────────────────────── -->
   @if (showOptions) {
     <div class="options-panel">
+
+      <!-- Description -->
+      <div class="opt-group">
+        <label class="opt-label" for="add-desc">Description (optional)</label>
+        <textarea id="add-desc" class="desc-input" formControlName="description"
+                  placeholder="Add details..." rows="2"></textarea>
+      </div>
 
       <!-- Priority -->
       <div class="opt-group">
         <span class="opt-label">Priority</span>
         <div class="priority-row">
           @for (p of priorities; track p) {
-            <label
-              class="priority-chip"
+            <label class="priority-chip"
               [class.priority-chip--active]="priorityCtrl.value === p"
               [class.priority-chip--low]="p === 'low'"
               [class.priority-chip--medium]="p === 'medium'"
-              [class.priority-chip--high]="p === 'high'"
-            >
-              <input
-                type="radio"
-                class="sr-only"
-                [value]="p"
-                formControlName="priority"
-              />
+              [class.priority-chip--high]="p === 'high'">
+              <input type="radio" class="sr-only" [value]="p" formControlName="priority" />
               {{ p }}
             </label>
           }
@@ -70,12 +55,7 @@
       <!-- Due Date -->
       <div class="opt-group">
         <label class="opt-label" for="add-due">Due date (optional)</label>
-        <input
-          id="add-due"
-          type="date"
-          class="date-input"
-          formControlName="dueDate"
-        />
+        <input id="add-due" type="date" class="date-input" formControlName="dueDate" />
       </div>
 
     </div>

@@ -1,0 +1,36 @@
+<div class="auth-wrap">
+  <div class="auth-card">
+
+    <h2 class="auth-title">Welcome back</h2>
+    <p class="auth-sub">Sign in to your Todo account</p>
+
+    @if (error) {
+      <p class="auth-error">{{ error }}</p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form">
+
+      <div class="field">
+        <label class="field__label" for="username">Username</label>
+        <input id="username" type="text" class="field__input"
+               formControlName="username" autocomplete="username" placeholder="your username" />
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="password">Password</label>
+        <input id="password" type="password" class="field__input"
+               formControlName="password" autocomplete="current-password" placeholder="••••••••" />
+      </div>
+
+      <button class="submit-btn" type="submit" [disabled]="loading">
+        {{ loading ? 'Signing in…' : 'Sign In' }}
+      </button>
+
+    </form>
+
+    <p class="auth-footer">
+      No account? <a routerLink="/register">Create one</a>
+    </p>
+
+  </div>
+</div>

@@ -1,11 +1,13 @@
 <div class="home">
-
   <app-add-todo></app-add-todo>
 
-  <app-todo-list></app-todo-list>
+  @if (todoStore.loading()) {
+    <div class="loading">Loading tasks…</div>
+  } @else {
+    <app-todo-list></app-todo-list>
 
-  @if (todoStore.totalCount() > 0) {
-    <app-filter-bar></app-filter-bar>
+    @if (todoStore.totalCount() > 0) {
+      <app-filter-bar></app-filter-bar>
+    }
   }
-
 </div>

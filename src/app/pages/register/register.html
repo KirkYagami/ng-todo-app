@@ -1,0 +1,54 @@
+<div class="auth-wrap">
+  <div class="auth-card">
+
+    <h2 class="auth-title">Create account</h2>
+    <p class="auth-sub">Start managing your todos today</p>
+
+    @if (error) {
+      <p class="auth-error">{{ error }}</p>
+    }
+    @if (success) {
+      <p class="auth-success">{{ success }}</p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form">
+
+      <div class="field">
+        <label class="field__label" for="reg-username">Username</label>
+        <input id="reg-username" type="text" class="field__input"
+               formControlName="username" autocomplete="username" placeholder="choose a username" />
+        @if (form.controls.username.invalid && form.controls.username.touched) {
+          <span class="field__error">At least 3 characters required.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="reg-email">Email</label>
+        <input id="reg-email" type="email" class="field__input"
+               formControlName="email" autocomplete="email" placeholder="you@example.com" />
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+          <span class="field__error">A valid email is required.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="reg-password">Password</label>
+        <input id="reg-password" type="password" class="field__input"
+               formControlName="password" autocomplete="new-password" placeholder="min. 6 characters" />
+        @if (form.controls.password.invalid && form.controls.password.touched) {
+          <span class="field__error">At least 6 characters required.</span>
+        }
+      </div>
+
+      <button class="submit-btn" type="submit" [disabled]="loading">
+        {{ loading ? 'Creating account…' : 'Create Account' }}
+      </button>
+
+    </form>
+
+    <p class="auth-footer">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </p>
+
+  </div>
+</div>

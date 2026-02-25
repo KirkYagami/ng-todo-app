@@ -5,13 +5,13 @@ import {
   ViewContainerRef,
   AfterViewInit,
 } from '@angular/core';
+import { RouterOutlet }         from '@angular/router';
 import { Header }               from './components/header/header';
-import { Home }                 from './home/home';
 import { DynamicLoaderService } from './services/dynamic-loader';
 
 @Component({
   selector:    'app-root',
-  imports:     [Header, Home],
+  imports:     [RouterOutlet, Header],
   templateUrl: './app.html',
   styleUrl:    './app.scss',
 })

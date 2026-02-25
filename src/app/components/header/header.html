@@ -6,16 +6,19 @@
       My Todo App
     </h1>
 
-    @if (todoStore.totalCount() > 0) {
-      <div class="header-stats">
-        <span class="badge">
-          {{ todoStore.totalCount() }} total
-        </span>
-        <span class="badge badge--highlight">
-          {{ todoStore.activeCount() }} remaining
-        </span>
-      </div>
-    }
+    <div class="header-right">
+      @if (todoStore.totalCount() > 0) {
+        <div class="header-stats">
+          <span class="badge">{{ todoStore.totalCount() }} total</span>
+          <span class="badge badge--highlight">{{ todoStore.activeCount() }} remaining</span>
+        </div>
+      }
+
+      @if (authService.isLoggedIn()) {
+        <span class="username">{{ authService.currentUser()?.username }}</span>
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      }
+    </div>
 
   </div>
 </header>
